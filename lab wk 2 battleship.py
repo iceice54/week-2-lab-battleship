@@ -21,7 +21,7 @@ class Board:
             for i in self.placement[int(row)]:
                 print("hi")
         elif orientation == "v":
-            pass
+            print("hello")
         else:
             raise ValueError("invalid orientation")
 
