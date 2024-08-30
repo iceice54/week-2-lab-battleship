@@ -19,7 +19,7 @@ class Board:
         if orientation == "h":
             print(type(row))
             for i in self.placement[int(row)]:
-                print("hi")
+                print("hi this is from pc")
         elif orientation == "v":
             print("hello world")
         else:
