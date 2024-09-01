@@ -29,7 +29,7 @@ class Board:
         else:
             raise ValueError("invalid orientation")
         
-        self.printBoard()
+        self.printBoardPlacement()
         
         # self.printBoard()
 
@@ -38,8 +38,12 @@ class Board:
         # print(column)
         # print(shipLength)
 
-    def printBoard(self):
+    def printBoardPlacement(self):
         for i in self.placement:
+            print(i)
+
+    def printBoardHit(self):
+        for i in self.hit:
             print(i)
 
 class Game:
@@ -48,9 +52,19 @@ class Game:
         p2Board = Board("Player 2")
         p1points = 0
         p2points = 0
-        while (p1points < 7 or p2points < 7):
+        while (p1points < 7 and p2points < 7):
             p1points += self.takeTurn(p2Board, "Player 1")
             p2points += self.takeTurn(p1Board, "Player 2")
+            print(p1points)
+            print(p2points)
+        if p1points == 7:
+            print("Player 1 wins!")
+        elif p2points == 7:
+            print("Player 2 wins!")
+        elif p1points == p2points == 7:
+            print("Draw!")
+        else:
+            print("Error!")
 
     def takeTurn(self, board:Board, player):
         row, column = input(f"{player}, what row and column do you want to attack?").split(",")
@@ -59,16 +73,19 @@ class Game:
         if target == 1:
             #Attack hits target
             print("You hit a ship!")
+            board.hit[int(row)-1][ord(column)-97] = "1"
             board.placement[int(row)-1][ord(column)-97] = "X"
-            board.printBoard()
+            board.printBoardHit()
+            board.printBoardPlacement()
             return 1
         elif target == 0:
             print("You missed!")
-            board.printBoard()
+            board.hit[int(row)-1][ord(column)-97] = "X"
+            board.printBoardHit()
             return 0
         elif target == "X":
             print("You have already hit a ship there")
-            board.printBoard()
+            board.printBoardHit()
             return 0
 
 game = Game()
