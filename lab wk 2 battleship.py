@@ -32,13 +32,6 @@ class Board:
             raise ValueError("invalid orientation")
         
         self.printBoardPlacement()
-        
-        # self.printBoard()
-
-        # print(orientation)
-        # print(row)
-        # print(column)
-        # print(shipLength)
 
     def printBoardPlacement(self):
         for i in self.placement:
@@ -91,4 +84,3 @@ class Game:
             return 0
 
 game = Game()
-# printBoard(p1Board.placement)
