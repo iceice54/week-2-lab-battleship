@@ -15,17 +15,19 @@ class Board:
             orientation, row, column = input(f"{player} where do you want to place your {ship}? Enter in this format: \"orientation,row,column\": ").split(",")
         except:
             raise
+
+        columnToNum = ord(column - 97)
         
         if orientation == "h":
-            for columnNum in range(ord(column)-97, ord(column) - 97 + shipLength):
+            for columnNum in range(columnToNum, columnToNum + shipLength):
                 if self.placement[int(row)-1][columnNum] == 1:
                     raise IndexError("Your ships are overlapping!")
                 self.placement[int(row)-1][columnNum] = 1
         elif orientation == "v":
             for rowNum in range(int(row), int(row) + shipLength):
-                if self.placement[rowNum-1][ord(column)-97] == 1:
+                if self.placement[rowNum-1][columnToNum] == 1:
                     raise IndexError("Your ships are overlapping!")
-                self.placement[rowNum-1][ord(column)-97] = 1
+                self.placement[rowNum-1][columnToNum] = 1
         else:
             raise ValueError("invalid orientation")
         
